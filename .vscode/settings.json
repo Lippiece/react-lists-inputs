@@ -1,1 +1,9 @@
-{}
+{
+  "task.allowAutomaticTasks": "on",
+  "workbench.colorCustomizations": {
+    "errorLens.errorBackground": "#e454543d",
+    "errorLens.errorForeground": "#e4545491",
+    "editorError.background": "#ffffff00",
+    "editorError.foreground": "#ff000000"
+  }
+}

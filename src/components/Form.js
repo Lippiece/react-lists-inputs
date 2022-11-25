@@ -1,62 +1,57 @@
-import { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
+import Sanctuary from "sanctuary";
 
+import validateForm from "../logic/validateForm.js";
+
+const {
+  Left,
+  Right,
+  Maybe,
+  Just,
+  pipe,
+  either,
+  isNothing,
+  isJust,
+  map,
+} = Sanctuary;
 const Form = () => {
 
-  // TODO: write submitForm
-  const [
-    answer,
-    setAnswer,
-  ] = useState(
-    ""
-  );
-  const [
-    error,
-    setError,
-  ] = useState(
-    null
-  );
   const [
     status,
     setStatus,
-  ] = useState(
-    "typing"
-  ); // 'typing', 'submitting', or 'success'
+  ] = useState( "typing" );
+  const [
+    error,
+    setError,
+  ] = useState( Left( "No error" ) );
+  const [
+    answer,
+    setAnswer,
+  ] = useState( ""  );
 
-  const submitForm = event => {
+  const handleChange = event => {
 
-    event.preventDefault();
-    const form      = event.target;
-    const input     = form.querySelector(
-      "input"
-    );
-    const { value } = input;
+    const { value } = event.target;
 
-    if ( value === "" ) {
-
-      return setError(
-        "Please enter a value"
-      );
-
-    }
-
-    setStatus(
-      "submitting"
-    );
-    return setError(
-      null
-    );
+    return pipe( [
+      validateForm,
+      either( setError )( setAnswer ),
+    ] )( value );
 
   };
 
-  return status === "success" ? (
-    <p>Success!</p>
-  ) : ( 
-    <form className="form" onSubmit={submitForm}>
-      <input type="text" />
-      <button onSubmit={submitForm} type="submit">
-        Add
-      </button>
+  return (
+    <form>
+      <label>
+        Name:
+        <input type="text" onChange={handleChange} />
+      </label>
+      <p>
+        {
+          `Status: ${ status }
+          Error: ${ error }`
+        }
+      </p>
     </form>
   );
 

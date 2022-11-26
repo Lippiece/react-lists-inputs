@@ -20,13 +20,12 @@ const isEmpty    = ( /** @type {string} */ value ) =>
     ? Left( "Empty" )
     : Right( value ) );
 
-// validateForm :: string -> string
+// validateForm :: string -> Either
 const validateForm = ( /** @type {string} */ value ) =>
   pipe( [
     isEmpty,
     either( Left )( isTooShort ),
     either( Left )( isTooLong ),
     either( Left )( Right ),
-
   ] )( value );
 export default validateForm;

@@ -2,6 +2,9 @@
 import {
   Left, Right,
 } from "sanctuary";
+import {
+  describe, expect, test,
+} from "vitest";
 
 import validateForm from "../logic/validateForm";
 

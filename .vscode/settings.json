@@ -4,5 +4,6 @@
     "errorLens.errorForeground": "#e45454da",
     "editorError.background": "#ffffff00",
     "editorError.foreground": "#ff000000"
-  }
+  },
+  "testing.automaticallyOpenPeekView": "never"
 }

@@ -6,6 +6,7 @@ import { defineConfig } from "vite";
 /// <reference types="vitest" />
 // https://vitejs.dev/config/
 export default defineConfig( {
+  define : { "process.env": {} },
   plugins: [ react() ],
   test   : { exclude: [ "**/node_modules/**" ] },
 } );

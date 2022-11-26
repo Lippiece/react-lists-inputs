@@ -1,4 +1,4 @@
-import Sanctuary, {
+import {
   either,
   Left,
   pipe,

@@ -1,19 +1,12 @@
 import React, { useState } from "react";
-import Sanctuary from "sanctuary";
-
-import validateForm from "../logic/validateForm.js";
-
-const {
-  Left,
-  Right,
-  Maybe,
-  Just,
-  pipe,
+import {
   either,
-  isNothing,
-  isJust,
-  map,
-} = Sanctuary;
+  Left,
+  pipe,
+} from "sanctuary";
+
+import validateForm from "../logic/validateForm";
+
 const Form = () => {
 
   const [

@@ -1,50 +1,71 @@
 import React, { useState } from "react";
 import {
   either,
+  isJust,
   Left,
+  map,
+  Nothing,
   pipe,
 } from "sanctuary";
 
-import validateForm from "../logic/validateForm";
+import validateForm from "../logic/validateForm.js";
 
 const Form = () => {
 
   const [
     status,
     setStatus,
-  ] = useState( "typing" );
+  ] = useState( "initial" );
   const [
     error,
     setError,
-  ] = useState( Left( "No error" ) );
+  ] = useState(  "" );
   const [
     answer,
     setAnswer,
   ] = useState( ""  );
 
+  const handleError = ( /** @type {string} */ value ) => {
+
+    setStatus( "error" );
+    return setError( value );
+
+  };
+
+  const handleSuccess = ( /** @type {string} */ value ) => {
+
+    setStatus( "typing" );
+    return setAnswer( value );
+
+  };
+
   const handleChange = event => {
 
     const { value } = event.target;
 
-    return pipe( [
+    pipe( [
       validateForm,
-      either( setError )( setAnswer ),
+      either( handleError )( handleSuccess ),
     ] )( value );
 
   };
 
+  const handleSubmit = event => {
+
+    event.preventDefault();
+    return setStatus( "submitted" );
+
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <label>
         Name:
         <input type="text" onChange={handleChange} />
       </label>
-      <p>
-        {
-          `Status: ${ status }
-          Error: ${ error }`
-        }
-      </p>
+      <button type="submit" disabled={status !== "typing"}>
+        Submit
+      </button >
     </form>
   );
 

@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import {
   either,
-  isJust,
-  Left,
-  map,
-  Nothing,
   pipe,
 } from "sanctuary";
 

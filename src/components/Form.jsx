@@ -10,7 +10,9 @@ import {
 
 import validateForm from "../logic/validateForm.js";
 
-const Form = () => {
+const Form = (  {
+  items, setItems,
+} ) => {
 
   const [
     status,
@@ -39,20 +41,25 @@ const Form = () => {
 
   };
 
-  const handleChange = event => {
+  const handleChange = ( /** @type {{ target: { value: any; }; }} */ event ) => {
 
     const { value } = event.target;
 
-    pipe( [
+    return pipe( [
       validateForm,
       either( handleError )( handleSuccess ),
     ] )( value );
 
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = ( /** @type {{ preventDefault: () => void; }} */ event ) => {
 
     event.preventDefault();
+    const updatedList = [
+      ...items,
+      answer,
+    ];
+    setItems( updatedList );
     return setStatus( "submitted" );
 
   };

@@ -8,5 +8,6 @@ import { defineConfig } from "vite";
 export default defineConfig( {
   define : { "process.env": {} },
   plugins: [ react() ],
+  resolve: { alias: { util: "util/" } },
   test   : { exclude: [ "**/node_modules/**" ] },
 } );
